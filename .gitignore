@@ -7,18 +7,48 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
-dist
-dist-ssr
-*.local
+
+# Build outputs
+dist/
+dist-ssr/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
-.idea
+.idea/
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# TypeScript
+*.tsbuildinfo
+
+# Test related
+coverage/
+cypress/videos/
+cypress/screenshots/
+
+# Lint/Formatter related
+.eslintcache
+.prettiercache
+
+# Package managers
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# OS specific
+Thumbs.db
+ehthumbs.db

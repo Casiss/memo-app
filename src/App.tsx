@@ -1,35 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+import MemoInput from './components/MemoInput';
+import MemoList from './components/MemoList';
+import { getMemos, saveMemos } from './utils/storage';
+import './styles/App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [memos, setMemos] = useState<string[]>([]);
+
+  useEffect(() => {
+    setMemos(getMemos());
+  }, []);
+
+  const addMemo = (newMemo: string) => {
+    const updatedMemos = [newMemo, ...memos];
+    setMemos(updatedMemos);
+    saveMemos(updatedMemos);
+  };
+
+  const deleteMemo = (index: number) => {
+    const updatedMemos = memos.filter((_, i) => i !== index);
+    setMemos(updatedMemos);
+    saveMemos(updatedMemos);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      <h1>Memo App</h1>
+      <MemoInput onAddMemo={addMemo} />
+      <MemoList memos={memos} onDeleteMemo={deleteMemo} />
+    </div>
+  );
 }
 
-export default App
+export default App;

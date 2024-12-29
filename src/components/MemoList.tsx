@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 
+interface Memo {
+  text: string;
+  timestamp: string;
+}
+
 interface MemoListProps {
-  memos: string[];
+  memos: Memo[];
   onDeleteMemo: (index: number) => void;
   onEditMemo: (index: number, updatedMemo: string) => void;
 }
@@ -12,7 +17,7 @@ const MemoList: React.FC<MemoListProps> = ({ memos, onDeleteMemo, onEditMemo }) 
 
   const startEditing = (index: number) => {
     setEditingIndex(index);
-    setEditingValue(memos[index]);
+    setEditingValue(memos[index].text);
   };
 
   const saveEditing = () => {
@@ -39,14 +44,15 @@ const MemoList: React.FC<MemoListProps> = ({ memos, onDeleteMemo, onEditMemo }) 
                 value={editingValue}
                 onChange={(e) => setEditingValue(e.target.value)}
               />
-              <button onClick={saveEditing}>Save</button>
-              <button onClick={cancelEditing}>Cancel</button>
+              <button onClick={saveEditing}>保存</button>
+              <button onClick={cancelEditing}>キャンセル</button>
             </>
           ) : (
             <>
-              <span>{memo}</span>
-              <button onClick={() => startEditing(index)}>Edit</button>
-              <button onClick={() => onDeleteMemo(index)}>Delete</button>
+              <span>{memo.text}</span>
+              <span className="timestamp">{memo.timestamp}</span>
+              <button onClick={() => startEditing(index)}>編集</button>
+              <button onClick={() => onDeleteMemo(index)}>削除</button>
             </>
           )}
         </li>

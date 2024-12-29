@@ -4,10 +4,15 @@ import MemoList from './components/MemoList';
 import { getMemos, saveMemos } from './utils/storage';
 import './styles/App.css';
 
+interface Memo {
+  text: string;
+  timestamp: string;
+}
+
 function App() {
-  const [memos, setMemos] = useState<string[]>([]);
+  const [memos, setMemos] = useState<Memo[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>(''); // 検索クエリの状態
-  const [filteredMemos, setFilteredMemos] = useState<string[]>([]); // フィルタリングされたメモ
+  const [filteredMemos, setFilteredMemos] = useState<Memo[]>([]); // フィルタリングされたメモ
 
   useEffect(() => {
     const savedMemos = getMemos();
@@ -19,13 +24,14 @@ function App() {
     // 検索クエリに基づいてメモをフィルタリング
     setFilteredMemos(
       memos.filter((memo) =>
-        memo.toLowerCase().includes(searchQuery.toLowerCase())
+        memo.text.toLowerCase().includes(searchQuery.toLowerCase())
       )
     );
   }, [searchQuery, memos]);
 
   const addMemo = (newMemo: string) => {
-    const updatedMemos = [newMemo, ...memos];
+    const timestamp = new Date().toLocaleString();
+    const updatedMemos = [{ text: newMemo, timestamp }, ...memos];
     setMemos(updatedMemos);
     saveMemos(updatedMemos);
   };
@@ -37,23 +43,29 @@ function App() {
   };
 
   const editMemo = (index: number, updatedMemo: string) => {
-    const updatedMemos = memos.map((memo, i) => (i === index ? updatedMemo : memo));
+    const updatedMemos = memos.map((memo, i) =>
+      i === index ? { ...memo, text: updatedMemo } : memo
+    );
     setMemos(updatedMemos);
     saveMemos(updatedMemos);
   };
 
   return (
     <div className="App">
-      <h1>Memo App</h1>
+      <h1>なんでもメモ</h1>
       <input
         type="text"
-        placeholder="Search memos..."
+        placeholder="メモを検索"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         className="search-input"
       />
       <MemoInput onAddMemo={addMemo} />
-      <MemoList memos={filteredMemos} onDeleteMemo={deleteMemo} onEditMemo={editMemo} />
+      <MemoList
+        memos={filteredMemos}
+        onDeleteMemo={deleteMemo}
+        onEditMemo={editMemo}
+      />
     </div>
   );
 }

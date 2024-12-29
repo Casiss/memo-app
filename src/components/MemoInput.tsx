@@ -19,11 +19,11 @@ const MemoInput: React.FC<MemoInputProps> = ({ onAddMemo }) => {
     <form onSubmit={handleSubmit} className="memo-input">
       <input
         type="text"
-        placeholder="Enter your memo"
+        placeholder="メモを入力"
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
-      <button type="submit">Add</button>
+      <button type="submit">追加</button>
     </form>
   );
 };

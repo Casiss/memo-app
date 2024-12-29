@@ -23,11 +23,17 @@ function App() {
     saveMemos(updatedMemos);
   };
 
+  const editMemo = (index: number, updatedMemo: string) => {
+    const updatedMemos = memos.map((memo, i) => (i === index ? updatedMemo : memo));
+    setMemos(updatedMemos);
+    saveMemos(updatedMemos);
+  };
+
   return (
     <div className="App">
       <h1>Memo App</h1>
       <MemoInput onAddMemo={addMemo} />
-      <MemoList memos={memos} onDeleteMemo={deleteMemo} />
+      <MemoList memos={memos} onDeleteMemo={deleteMemo} onEditMemo={editMemo} />
     </div>
   );
 }

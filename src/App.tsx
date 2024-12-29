@@ -6,10 +6,23 @@ import './styles/App.css';
 
 function App() {
   const [memos, setMemos] = useState<string[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>(''); // 検索クエリの状態
+  const [filteredMemos, setFilteredMemos] = useState<string[]>([]); // フィルタリングされたメモ
 
   useEffect(() => {
-    setMemos(getMemos());
+    const savedMemos = getMemos();
+    setMemos(savedMemos);
+    setFilteredMemos(savedMemos); // 初期状態では全てのメモを表示
   }, []);
+
+  useEffect(() => {
+    // 検索クエリに基づいてメモをフィルタリング
+    setFilteredMemos(
+      memos.filter((memo) =>
+        memo.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    );
+  }, [searchQuery, memos]);
 
   const addMemo = (newMemo: string) => {
     const updatedMemos = [newMemo, ...memos];
@@ -32,8 +45,15 @@ function App() {
   return (
     <div className="App">
       <h1>Memo App</h1>
+      <input
+        type="text"
+        placeholder="Search memos..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        className="search-input"
+      />
       <MemoInput onAddMemo={addMemo} />
-      <MemoList memos={memos} onDeleteMemo={deleteMemo} onEditMemo={editMemo} />
+      <MemoList memos={filteredMemos} onDeleteMemo={deleteMemo} onEditMemo={editMemo} />
     </div>
   );
 }

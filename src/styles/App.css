@@ -5,107 +5,108 @@
   }
   
   body {
-    display: flex; /* 子要素を中央揃えにするためにフレックスボックスを使用 */
-    justify-content: center; /* 水平方向に中央揃え */
-    align-items: center; /* 垂直方向に中央揃え */
-    min-height: 100vh; /* ビューポート全体の高さをカバー */
-    margin: 0; /* 不要な外部余白を削除 */
-    padding: 0; /* 不要な内部余白を削除 */
-    box-sizing: border-box; /* ボックスサイズを含めて計算 */
-    font-family: Arial, sans-serif; /* 統一感のあるフォント */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
   }
   
   .container {
     width: 100%;
-    max-width: 500px; /* 横幅を統一 */
-    margin: 0 auto; /* 中央揃え */
+    max-width: 500px;
+    margin: 0 auto;
     padding: 20px;
-    box-sizing: border-box; /* ボックスサイズを含めて計算 */
-    text-align: center; /* コンテンツを中央揃え */
+    box-sizing: border-box;
+    text-align: center;
   }
   
   .search-input {
     width: 100%;
-    padding: 10px 15px; /* 内側の余白を調整 */
-    font-size: 16px; /* フォントサイズを適切に設定 */
-    margin: 20px 0; /* 上下に余白を設け、中央揃え */
-    border: 1px solid #ccc; /* 枠線の色を設定 */
-    border-radius: 25px; /* 角を丸めて柔らかいデザインに */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 軽い影をつけて立体感を出す */
-    box-sizing: border-box; /* パディングを含めた幅を調整 */
-    outline: none; /* フォーカス時のアウトラインを削除 */
-    transition: all 0.3s ease; /* ホバーやフォーカス時のアニメーションを追加 */
+    padding: 10px 15px;
+    font-size: 16px;
+    margin: 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    outline: none;
+    transition: all 0.3s ease;
   }
   
   .search-input:focus {
-    border-color: #007bff; /* フォーカス時の枠線の色を変更 */
-    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3); /* フォーカス時の影を強調 */
+    border-color: #007bff;
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
   }
   
   .search-input::placeholder {
-    color: #999; /* プレースホルダーの色を調整 */
-    font-style: italic; /* プレースホルダーをイタリックに */
+    color: #999;
+    font-style: italic;
   }
   
   .memo-input {
-    display: flex; /* 入力フィールドとボタンを横並びに配置 */
+    display: flex;
+    flex-wrap: wrap; /* スマホで折り返しを許可 */
     margin-bottom: 20px;
-    width: 100%; /* 横幅を統一 */
+    width: 100%;
   }
   
   .memo-input input {
-    width: 100%;
-    padding: 10px 15px; /* 内側の余白を統一 */
-    font-size: 16px; /* フォントサイズを統一 */
-    border: 1px solid #ccc; /* 枠線の色を統一 */
-    border-radius: 25px 0 0 25px; /* 左側だけ丸める */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
-    box-sizing: border-box; /* パディングを含めた幅を調整 */
-    outline: none; /* フォーカス時のアウトラインを削除 */
-    transition: all 0.3s ease; /* アニメーション */
+    flex: 1;
+    min-width: 0;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 25px 0 0 25px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    outline: none;
+    transition: all 0.3s ease;
   }
   
   .memo-input button {
-    padding: 10px 20px; /* ボタン内の余白を調整 */
-    font-size: 16px; /* フォントサイズを統一 */
-    border: 1px solid #ccc; /* 枠線を統一 */
-    border-radius: 0 25px 25px 0; /* 右側だけ丸くする */
-    background-color: #fff; /* 背景色を指定 */
-    cursor: pointer; /* ポインタカーソルを表示 */
-    transition: all 0.3s ease; /* ホバー時のアニメーション */
-    margin-left: -1px; /* フィールドとの間の枠線を重ねる */
-    white-space: nowrap; /* 改行を防止 */
-    box-sizing: border-box; /* ボックスサイズを計算に含む */
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 0 25px 25px 0;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: -1px;
+    white-space: nowrap;
+    box-sizing: border-box;
   }
   
   .memo-input button:hover {
-    background-color: #f0f0f0; /* ホバー時の背景色変更 */
+    background-color: #f0f0f0;
   }
-  
   
   .memo-list {
     list-style: none;
     padding: 0;
-    margin: 0 auto; /* 中央揃え */
-    width: 100%; /* 横幅を統一 */
-    max-width: 500px; /* 最大幅を統一 */
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
   }
   
   .memo-item {
     display: flex;
-    align-items: center; /* 縦方向の整列を中央に */
+    align-items: center;
     justify-content: space-between;
     padding: 10px;
     border-bottom: 1px solid #ccc;
   }
   
   .memo-item > span {
-    flex: 1; /* メモ内容を残りのスペースに広げる */
+    flex: 1;
   }
   
   .memo-item > div {
     display: flex;
-    flex-direction: column; /* ボタンを縦方向に並べる */
+    flex-direction: column;
     margin-left: 10px;
   }
   
@@ -117,7 +118,24 @@
   
   .memo-item button {
     padding: 5px 10px;
-    margin: 5px 0; /* ボタン間の縦方向のスペース */
+    margin: 5px 0;
     cursor: pointer;
+  }
+  
+  /* モバイル向けレスポンシブデザイン */
+  @media (max-width: 768px) {
+    .memo-input {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .memo-input input {
+      margin-bottom: 10px;
+      border-radius: 25px;
+    }
+  
+    .memo-input button {
+      border-radius: 25px;
+    }
   }
   
